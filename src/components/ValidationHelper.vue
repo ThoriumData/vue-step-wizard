@@ -4,8 +4,11 @@
 </template>
 
 <script>
+
 import { validationMixin } from 'vuelidate';
-import { store } from "./store.js";
+import { store } from "../store/store.js";
+
+
 export default {
     name: 'ValidationHelper',
     mixins: [validationMixin],

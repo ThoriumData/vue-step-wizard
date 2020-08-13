@@ -1,25 +1,31 @@
 <template>
-    <div class="vue-step-wizard">
-        <div class="step-header">
-        <div class="step-progress">
-            <div class="bar progressbar" :style="{ width: progress + '%' }">
-            </div>
+    <div class="wizard">
+
+        <div class="wizard-header">
+
+<!--
+			<div class="wizard-progress">
+				<div class="bar progressbar" :style="{ width: progress + '%' }">
+				</div>
+			</div>
+ -->
+
+			<ul class="step-pills">
+				<li @click.prevent.stop="selectTab(index)" class="step-item" :class="{ 'active': tab.isActive, 'validated': tab.isValidated }" v-for="(tab, index) in tabs" v-bind:key="`tab-${index}`">
+					<a class="step-link" href="#">
+							<span class="tabStatus">{{index+1}} </span>
+							<span class="tabLabel">{{tab.title}}</span>
+					</a>
+				</li>
+			</ul>
         </div>
-        <ul class="step-pills">
-            <li @click.prevent.stop="selectTab(index)" class="step-item" :class="{ 'active': tab.isActive, 'validated': tab.isValidated }" v-for="(tab, index) in tabs" v-bind:key="`tab-${index}`">
-                <a class="step-link" href="#">
-                        <span class="tabStatus">{{index+1}} </span> 
-                        <span class="tabLabel">{{tab.title}}</span>
-                </a>
-            </li>
-        </ul>
-        </div>
-        <div class="step-body">
+
+        <div class="wizard-body">
             <form>
                 <slot></slot>
             </form>
         </div>
-        <div class="step-footer">
+        <div class="wizard-footer">
             <div class="btn-group" role="group">
                 <template v-if="!submitSuccess">
                   <button @click="previousTab" :disabled="currentTab === 0" class="step-button step-button-previous">Previous</button>
@@ -31,10 +37,14 @@
                 </template>
             </div>
         </div>
+
     </div>
 </template>
+
 <script>
-import { store } from "./store.js";
+
+import { store } from "../store/store.js";
+
 export default {
     name: 'form-wizard',
     data(){
@@ -54,11 +64,11 @@ export default {
             this.currentTab = this.tabs.findIndex((tab) => tab.isActive === true);
 
             //Select first tab if none is marked selected
-            if(this.currentTab === -1 && this.totalTabs > 0){  
+            if(this.currentTab === -1 && this.totalTabs > 0){
                 this.tabs[0].isActive = true;
                 this.currentTab = 0;
             }
-            
+
             //Setup Initial Progress
             this.progress = ((this.currentTab + 1) / this.totalTabs * 100);
 
@@ -75,19 +85,22 @@ export default {
     methods:{
         previousTab(){
             this._switchTab(this.currentTab - 1);
-
-            this.$emit('onPreviousStep'); 
+            this.$emit('onPreviousStep');
         },
 
         nextTab(){
-
-            if(this._validateCurrentTab() === false)
+            if(this._validateCurrentTab() === false) {
                 return;
+            };
+            this._switchTab(this.currentTab + 1);
+            this.$emit('onNextStep');
 
-            this._switchTab(this.currentTab + 1);    
+        },
 
-            this.$emit('onNextStep');          
-              
+        cancel(){
+
+           console.log ("cancelling...");
+
         },
 
         reset(){
@@ -96,7 +109,6 @@ export default {
              tab.isActive = false;
              tab.isValidated = false;
            });
-
            this._switchTab(0);
            this.submitSuccess = false;
            this.storeState.v.$reset();
@@ -109,20 +121,18 @@ export default {
         },
 
         selectTab(index){
-            if(index < this.currentTab){
+            if(index < this.currentTab) {
               this._switchTab(index);
             }
-
-            if(this._validateCurrentTab() === false){
+            if(this._validateCurrentTab() === false ){
                 return;
             }
 
-            if(this.tabs[index - 1].isValidated === false){
+            if(this.tabs[index - 1].isValidated === false) {
                 return;
             }
 
             this._switchTab(index);
-            
         },
 
 
@@ -133,7 +143,7 @@ export default {
         },
 
         _switchTab(index){
-            //Disable all tabs
+            // Disable all tabs
             this.tabs.forEach(tab => {
               tab.isActive = false;
             });
@@ -145,7 +155,7 @@ export default {
         },
 
         _validateCurrentTab(){
-            if(!this.isValidationSupport)  //Check if user wants to validate 
+            if(!this.isValidationSupport)  //Check if user wants to validate
                 return true;
 
             this.storeState.v.$touch();
@@ -165,76 +175,103 @@ export default {
           store.setCurrentTab(this.currentTab);
        }
     }
-    
+
 }
 </script>
-<style>
+
+
+<style lang="scss">
+
+
+$wizard-color-background: #F7F8FC;
+$wizard-width: 1000px;
+$wizard-padding: 40px;
+
+
+$wizard-body-color-background: #FFF;
+
+
 
   .progressbar {
     transition: width 1s ease;
-  } 
+  }
 
-  .vue-step-wizard{
-    background-color: #F7F8FC;
-    width: 900px;
+  .wizard {
+
+    width: $wizard-width;
     margin: auto;
-    padding: 40px;
+    padding: $wizard-padding;
+
+    background-color: $wizard-color-background;
+
   }
 
-  .step-progress{
-    height: 1rem;
-    background: white;
-    border-radius: 1rem;
-    margin: 1rem 0rem;
-  }
+	.wizard-progress {
+		height: 1rem;
+		background: white;
+		border-radius: 1rem;
+		margin: 1rem 0rem;
 
-  .step-progress .bar{
-      content: '';
-      height: 1rem;
-      border-radius: 1rem;
-      background-color: #4B8AEB;
-  }
+		.bar {
+			content: '';
+			height: 1rem;
+			border-radius: 1rem;
+			background-color: #4B8AEB;
+		}
 
-  .step-pills{
+	}
+
+
+  .step-pills {
     display: flex;
     background-color: white;
     justify-content: space-between;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+/*     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; */
+
+	.step-item {
+		background-color: #F5F5F5;
+		border-radius: 10px;
+		padding: 5px 20px;
+		list-style-type: none;
+		padding: .5rem 1.5rem;
+
+		a {
+			 text-decoration: none;
+			 color: #7B7B7B;
+		   }
+
+	  }
+
   }
 
-  .step-pills .step-item{
-    background-color: #F5F5F5;
-    border-radius: 10px;
-    padding: 5px 20px;
-    list-style-type: none;
-    padding: .5rem 1.5rem;
-  }
 
 
-   .step-pills .step-item a{
-     text-decoration: none;
-     color: #7B7B7B;
-   }
+/*    .step-pills .step-item  */
 
-   .step-pills .step-item.active{
-      border: 1px solid #4B8AEB;
-   }
+   .step-pills {
+	   .step-item.active {
+		  border: 1px solid #4B8AEB;
+	   }
 
-   .step-pills .step-item.validated{
+	.step-item.validated {
       border: 1px solid #008011;
    }
 
-   .step-body{
-     background-color: white;
+
+	}
+/*    .step-pills  */
+
+   .wizard-body {
+     background-color: $wizard-body-color-background;
      margin-left: auto;
      padding: 1rem;
      border-radius: 1rem;
-     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+/*      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; */
    }
 
-  .step-footer{
+  .wizard-footer {
      margin-left: auto;
      padding: 1rem;
      border-radius: 1rem;
@@ -242,7 +279,7 @@ export default {
      text-align: center;
    }
 
-  .step-button{
+  .step-button {
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
@@ -252,7 +289,7 @@ export default {
     border: 1px solid;
     border-radius: 12px;
     color: #22292f;
-    color: rgba(34,41,47,var(--text-opacity));
+/*     color: rgba(34,41,47,var(--text-opacity)); */
     padding: 0.5rem 1.25rem;
     font-size: .875rem;
     margin: 0.5rem;
@@ -261,24 +298,24 @@ export default {
     box-shadow: none !important;
   }
 
-  .step-button-next{
+  .step-button-next {
     background-color: #126fde;
   }
 
-  .step-button-previous{
+  .step-button-previous {
     background-color: #3deaba;
   }
 
-  .step-button-submit{
+  .step-button-submit {
     background-color: #4fa203;
   }
 
-  .step-button-reset{
+  .step-button-reset {
     background-color: #037da2;
   }
 
   /** Wizard Ends */
-  .tabStatus{
+  .tabStatus {
       display: inline-block;
       width: 1.5rem;
       height: 1.5rem;
