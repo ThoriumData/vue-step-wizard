@@ -1,11 +1,11 @@
 # vue-step-wizard
 
-![alt text](https://github.com/tushargugnani/vue-step-wizard/blob/master/public/Vue-Step-Wizard.gif?raw=true)
+![alt text](https://github.com/thoriumdata/vue-step-wizard/blob/master/public/Vue-Step-Wizard.gif?raw=true)
 
 
 ## Documentation
 
-https://tushargugnani.github.io/vue-step-wizard/#/
+https://thoriumdata.github.io/vue-step-wizard/#/
 
 
 ## Installing Plugin
