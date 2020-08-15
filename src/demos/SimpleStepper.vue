@@ -103,7 +103,7 @@ export default {
     },
     methods:{
         onComplete(){
-            alert("Submitting Form ! Rock On");
+            alert("[simplestepper] Submitting Form.");
             this.$refs.formwizard.changeStatus();
         },
 
@@ -114,15 +114,15 @@ export default {
         },
 
         cancel(){
-            alert("cancel the whole thing?");
+            console.log("[simplestepper] cancel the whole thing?");
         },
 
         nextStep(){
-            alert("On Next Step");
+            console.log("[simplestepper] going to Next Step");
         },
 
         previousStep(){
-            alert("On Previous Step");
+            console.log("[simplestepper] going to Previous Step");
         }
     }
 }

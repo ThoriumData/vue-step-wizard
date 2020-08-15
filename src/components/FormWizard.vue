@@ -87,11 +87,13 @@ export default {
 
     methods:{
         previousTab() {
+          console.log ("[formwizard] previous tab");
             this._switchTab(this.currentTab - 1);
             this.$emit('onPreviousStep');
         },
 
         nextTab() {
+          console.log ("[formwizard] next tab");
             if(this._validateCurrentTab() === false) {
                 return;
             }
@@ -101,7 +103,7 @@ export default {
         },
 
         cancel() {
-           console.log ("cancelling...");
+           console.log ("[formwizard] cancelling...");
         },
 
         reset() {
@@ -137,6 +139,7 @@ export default {
 
 
         onSubmit() {
+          console.log ("[formwizard] submitting...");
             if (this._validateCurrentTab() === false)
                 return;
             this.$emit('onComplete');

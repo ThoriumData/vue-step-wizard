@@ -38,7 +38,7 @@ export default {
 
     validations() {
         return {
-            formData : this.rules
+            formData: this.rules
         };
     }
 }
