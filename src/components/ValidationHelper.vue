@@ -5,34 +5,37 @@
 
 <script>
 
-import { validationMixin } from 'vuelidate';
-import { store } from "../store/store.js";
+import { validationMixin } from "vuelidate";
 
+// import { store } from "../store/store";
 
 export default {
     name: 'ValidationHelper',
     mixins: [validationMixin],
-    data(){
+    data() {
         return{
-            storeState: store.state,
+            // storeState: store.state,
         }
     },
-    mounted(){
-        store.setValidation(this.$v);
+    mounted() {
+        // store.setValidation(this.$v);
+        this.$store.dispatch("wizard/changeValidation", this.$v);
     },
-    computed:{
+    computed: {
         rules() {
-            if(this.validationRules)
-                return this.validationRules[this.storeState.currentTab] ? this.validationRules[this.storeState.currentTab] : {}
-            else
-                return {};
+            // if(this.validationRules)
+                // return this.validationRules[this.store.currentTab] ? this.validationRules[this.store.currentTab] : {}
+            // else
+                // return {};
+            return true;
         },
     },
-    methods:{
+    methods: {
         hasError(fieldName){
             return (fieldName in this.$v.formData) && (this.$v.formData[fieldName].$error)
         }
     },
+
     validations() {
         return {
             formData : this.rules

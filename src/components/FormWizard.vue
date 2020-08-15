@@ -3,6 +3,7 @@
 
         <div class="wizard-header">
 
+<!-- disable progress bar -->
 <!--
 			<div class="wizard-progress">
 				<div class="bar progressbar" :style="{ width: progress + '%' }">
@@ -43,22 +44,24 @@
 
 <script>
 
-import { store } from "../store/store.js";
+// import { store } from "../store/store";
+// let store = {};
+// store.state = null;
 
 export default {
     name: 'form-wizard',
-    data(){
+    data() {
         return{
             tabs: [],
             currentTab : 0,
             totalTabs : 0,
-            storeState: store.state,
+            // storeState: store.state,
             submitSuccess : false,
             progress: 0,
             isValidationSupport: false
         }
     },
-    mounted(){
+    mounted() {
             this.tabs = this.$children;
             this.totalTabs = this.tabs.length;
             this.currentTab = this.tabs.findIndex((tab) => tab.isActive === true);
@@ -69,66 +72,63 @@ export default {
                 this.currentTab = 0;
             }
 
-            //Setup Initial Progress
+            // Setup Initial Progress
             this.progress = ((this.currentTab + 1) / this.totalTabs * 100);
 
     },
 
-    updated(){
+    updated() {
         /*
           Using this lifehook - since store variable gets updated after component is mounted
           isValidationSupport checks if user is looking to perform validation on each step
         */
-        this.isValidationSupport = (Object.keys(this.storeState.v).length !== 0 && this.storeState.v.constructor === Object) ? true : false;
+        // this.isValidationSupport = (Object.keys(this.store.validation).length !== 0 && this.store.validation.constructor === Object) ? true : false;
     },
 
     methods:{
-        previousTab(){
+        previousTab() {
             this._switchTab(this.currentTab - 1);
             this.$emit('onPreviousStep');
         },
 
-        nextTab(){
+        nextTab() {
             if(this._validateCurrentTab() === false) {
                 return;
-            };
+            }
             this._switchTab(this.currentTab + 1);
             this.$emit('onNextStep');
 
         },
 
-        cancel(){
-
+        cancel() {
            console.log ("cancelling...");
-
         },
 
-        reset(){
-
+        reset() {
            this.tabs.forEach(tab => {
              tab.isActive = false;
              tab.isValidated = false;
            });
            this._switchTab(0);
            this.submitSuccess = false;
-           this.storeState.v.$reset();
+          //  this.store.validation.$reset();
 
            this.$emit('onReset');
         },
 
-        changeStatus(){
+        changeStatus() {
             this.submitSuccess = true;
         },
 
-        selectTab(index){
-            if(index < this.currentTab) {
+        selectTab(index) {
+            if (index < this.currentTab) {
               this._switchTab(index);
             }
-            if(this._validateCurrentTab() === false ){
+            if (this._validateCurrentTab() === false ){
                 return;
             }
 
-            if(this.tabs[index - 1].isValidated === false) {
+            if (this.tabs[index - 1].isValidated === false) {
                 return;
             }
 
@@ -136,13 +136,13 @@ export default {
         },
 
 
-        onSubmit(){
-            if(this._validateCurrentTab() === false)
+        onSubmit() {
+            if (this._validateCurrentTab() === false)
                 return;
             this.$emit('onComplete');
         },
 
-        _switchTab(index){
+        _switchTab(index) {
             // Disable all tabs
             this.tabs.forEach(tab => {
               tab.isActive = false;
@@ -154,16 +154,16 @@ export default {
             this.progress = ((this.currentTab + 1) / this.totalTabs * 100);
         },
 
-        _validateCurrentTab(){
+        _validateCurrentTab() {
             if(!this.isValidationSupport)  //Check if user wants to validate
                 return true;
 
-            this.storeState.v.$touch();
+            // this.store.validation.$touch();
 
-            if (this.storeState.v.$invalid) {
-                this.tabs[this.currentTab].isValidated = false;
-                return false;
-            }
+            // if (this.store.validation.$invalid) {
+                // this.tabs[this.currentTab].isValidated = false;
+                // return false;
+            // }
 
             this.tabs[this.currentTab].isValidated = true;
 
@@ -171,8 +171,8 @@ export default {
         }
     },
     watch:{
-       currentTab(){
-          store.setCurrentTab(this.currentTab);
+       currentTab() {
+          this.$store.setCurrentTab(this.currentTab);
        }
     }
 
@@ -186,7 +186,6 @@ export default {
 $wizard-color-background: #F7F8FC;
 $wizard-width: 1000px;
 $wizard-padding: 40px;
-
 
 $wizard-body-color-background: #FFF;
 

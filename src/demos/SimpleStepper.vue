@@ -17,7 +17,7 @@
                 </div>
             </div>
         </tab-content>
-        <tab-content title="About your Company"> 
+        <tab-content title="About your Company">
             <div class="form-group">
                 <label for="companyName">Your Company Name</label>
                 <input type="text" class="form-control" :class="hasError('companyName') ? 'is-invalid' : ''" placeholder="Enter your Company / Organization name" v-model="formData.companyName">
@@ -62,9 +62,11 @@
 import FormWizard from '../components/FormWizard.vue';
 import TabContent from '../components/TabContent.vue';
 import ValidationHelper from '../components/ValidationHelper.vue';
-import { required } from 'vuelidate/lib/validators';
-import { email } from 'vuelidate/lib/validators';
-import { numeric } from 'vuelidate/lib/validators';
+
+import { required, email, numeric } from 'vuelidate/lib/validators';
+// import { email } from 'vuelidate/lib/validators';
+// import { numeric } from 'vuelidate/lib/validators';
+
 const checked = (value) => value === true;
 
 export default {
@@ -76,7 +78,7 @@ export default {
     data(){
         return {
             formData:{
-                fullName: '',
+                fullName: "",
                 email: null,
                 companyName: null,
                 numberOfEmployees: null,
@@ -84,9 +86,18 @@ export default {
                 terms: false,
             },
             validationRules:[
-                {fullName: {required}, email: {required, email} },
-                {companyName: {required}, numberOfEmployees: {required, numeric} },
-                {referral: {required}, terms: {checked} }
+                {
+                    fullName: {required},
+                    email: {required, email}
+                },
+                {
+                    companyName: {required},
+                    numberOfEmployees: {required, numeric}
+                },
+                {
+                    referral: {required},
+                    terms: {checked}
+                }
             ]
         }
     },
@@ -102,12 +113,16 @@ export default {
             }
         },
 
+        cancel(){
+            alert("cancel the whole thing?");
+        },
+
         nextStep(){
-            //alert("On Next Step");
+            alert("On Next Step");
         },
 
         previousStep(){
-            //alert("On Previous Step");
+            alert("On Previous Step");
         }
     }
 }
