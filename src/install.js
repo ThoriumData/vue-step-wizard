@@ -16,9 +16,9 @@ if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(VueStepWizard);
 }
 
-export default VueStepWizard
+export default VueStepWizard;
 export {
     FormWizard,
     TabContent,
     ValidationHelper
-  }
+  };
