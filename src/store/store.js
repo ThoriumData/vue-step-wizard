@@ -1,23 +1,21 @@
+// vue store for front end
+// manages state of the wizard
 
-const store = {
+import Vue from "vue";
+import Vuex from "vuex";
 
+// modules
+import wizard from "./modules/wizard";
 
-    state: {
-      currentTab: 0,
-      v: {},
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+    // enabling strict mode in the dev environment
+    strict: process.env.NODE_ENV !== "production",
+
+    modules: {
+        wizard,
     },
-
-    setCurrentTab (newValue) {
-        this.state.currentTab = newValue;
-    },
-
-    setValidation(newValue){
-      this.state.v = newValue;
-    }
-
-
-
-}
+});
 
 export default store;
-
