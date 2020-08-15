@@ -172,7 +172,8 @@ export default {
     },
     watch:{
        currentTab() {
-          this.$store.setCurrentTab(this.currentTab);
+          this.$store.dispatch("wizard/changeTab", this.currentTab);
+          // this.$store.setCurrentTab(this.currentTab);
        }
     }
 

@@ -32,6 +32,12 @@ const wizard = {
             commit("setCurrentTab", tab);
         },
 
+        changeTab({ commit }, tab) {
+            console.log("[store] change tab:", tab);
+
+            commit("setCurrentTab", tab);
+        },
+
         changeValidation({ commit }, validation) {
             console.log("[store] changeValidation: ", validation);
 
