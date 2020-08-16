@@ -16,5 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
+    // main application scss
+    @import "@/assets/scss/thoriumData";
+
+    // wizard scss
+    @import "@/assets/scss/components/wizard";
 
 </style>
