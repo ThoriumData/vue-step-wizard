@@ -116,7 +116,7 @@ import { required, email, numeric } from 'vuelidate/lib/validators';
 const checked = (value) => value === true;
 
 export default {
-    name: 'SimpleStepper',
+    name: 'SimpleWizard',
     components: {
         FormWizard, TabContent
     },
@@ -149,7 +149,7 @@ export default {
     },
     methods:{
         onComplete() {
-            alert("[simplestepper] Submitting Form.");
+            alert("[simplewizard] Submitting Form.");
             this.$refs.formwizard.changeStatus();
         },
 
@@ -160,15 +160,15 @@ export default {
         },
 
         cancel() {
-            console.log("[simplestepper] cancel the whole thing?");
+            console.log("[simplewizard] cancel the whole thing?");
         },
 
         nextStep() {
-            console.log("[simplestepper] going to Next Step");
+            console.log("[simplewizard] going to Next Step");
         },
 
         previousStep() {
-            console.log("[simplestepper] going to Previous Step");
+            console.log("[simplewizard] going to Previous Step");
         }
     }
 }
