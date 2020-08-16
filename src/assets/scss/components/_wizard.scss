@@ -1,0 +1,244 @@
+
+// scss file
+// for wizard component
+
+@use "sass:map";
+@use "sass:color";
+
+@use "../common";
+
+
+$wizard-color-background: #F7F8FC;
+
+$wizard-width: 100%;
+$wizard-padding: 40px;
+
+$wizard-body-color-background: #FFF;
+
+
+$wizard-step-color-background-default:    #AAA;
+$wizard-step-color-background-active:       $thorium-blue;
+$wizard-step-color-background-completed:   color.adjust($alert-success, $lightness: -7%);
+
+
+
+$wizard-step-text-color:                $core-black;
+$wizard-step-index-background-color:    #888;
+
+$wizard-step-index-background-completed:   color.adjust($alert-success, $lightness: -37%);
+
+
+
+// wizard top level style
+    #wizard {
+
+        width: $wizard-width;
+
+        margin: auto;
+        // padding: $wizard-padding;
+
+
+        // todo: dev
+        background-color: $wizard-color-background;
+
+    }
+
+  // wizard progress bar
+
+  // .progressbar {
+  //   transition: width 1s ease;
+  // }
+
+	// .wizard-progress {
+	// 	height: 1rem;
+	// 	background: white;
+	// 	border-radius: 1rem;
+	// 	margin: 1rem 0rem;
+
+	// 	.bar {
+	// 		content: '';
+	// 		height: 1rem;
+	// 		border-radius: 1rem;
+	// 		background-color: #4B8AEB;
+	// 	}
+	// }
+
+    .wizard-header {
+
+        background-color: #99B;
+
+        margin-bottom: 1rem;
+
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+
+        ul {
+            // background-color: #F00 !important;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .wizard-steps {
+
+        &ul {
+        margin: 0;
+        }
+
+        display: flex;
+        justify-content: space-between;
+
+
+    // an individual step
+        .step-item {
+
+            flex: 1 1 0px;
+
+            padding: 0 2rem 0 0;
+
+            border-radius: 0;
+            list-style-type: none;
+
+            // general background-color color of the step
+            background-color: $wizard-step-color-background-default;
+
+            // the step number
+            .stepIndex {
+                border-left: 1px solid #FFF;
+
+                color: $core-black;
+                background-color: $wizard-step-index-background-color;
+            }
+
+            // the step label
+            .stepLabel {
+                color: $core-black;
+            }
+
+            // active step item
+            &.active {
+                background-color: $wizard-step-color-background-active;
+
+                .stepIndex {
+                    background-color: $thorium-blue-light6;
+                    color: $core-white;
+                }
+                .stepLabel {
+                    color: $core-white;
+                }
+
+            }
+
+            // past step item. accepted and good
+            &.completed {
+                background-color: $wizard-step-color-background-completed;
+
+                .stepIndex {
+                    background-color: $wizard-step-index-background-completed;
+                    color: $core-white;
+                }
+                .stepLabel {
+                    color: $core-black;
+                }
+
+            }
+
+
+            .validated {
+                border: 1px solid #008011;
+            }
+
+
+
+            a {
+                text-decoration: none;
+                color: #7B7B7B;
+            }
+
+        }
+
+  }
+
+  // defaults for the index number
+  .stepIndex {
+      display: inline-block;
+      min-width: 2rem;
+      min-height: 1.5rem;
+
+      margin-right: 1rem;
+      padding: .5rem 1rem;
+
+      line-height: 1.5rem;
+
+      text-align: center;
+
+  }
+
+  // defaults for the step label
+  .stepLabel {
+        line-height: 1.5rem;
+  }
+
+
+  // main body of the wizard; where all the content goes
+   .wizard-body {
+
+        margin-left: auto;
+
+   }
+
+    // where the buttons go
+  .wizard-footer {
+
+     padding: 1rem;
+     margin: 1rem 0rem;
+     text-align: center;
+   }
+
+  .step-button {
+    position: relative;
+
+    max-width: 30rem;
+
+    margin: 0.5rem;
+    padding: 0.5rem 1.25rem;
+
+    border: 1px solid;
+    //border-radius: 12px;
+
+    font-weight: 700;
+    line-height: 1;
+    // text-transform: uppercase;
+
+    text-align: center;
+    color: #22292f;
+
+
+    // font-size: $font-size-sm;
+
+    outline: none !important;
+    box-shadow: none !important;
+
+
+
+
+  }
+
+
+
+    .step-button-next {
+        background-color: #126fde;
+    }
+
+    .step-button-previous {
+        background-color: #3deaba;
+    }
+
+    .step-button-submit {
+        background-color: #4fa203;
+    }
+
+    .step-button-reset {
+        background-color: #037da2;
+    }
+
