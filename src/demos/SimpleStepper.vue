@@ -1,6 +1,17 @@
 <template>
-    <form-wizard ref="formwizard" @onComplete="onComplete" @onNextStep="nextStep" @onPreviousStep="previousStep" @onReset="reset">
-        <tab-content title="About You" :selected="true">
+    <div>
+        <h1>
+            Wizard Heading
+        </h1>
+
+   <form-wizard ref="formwizard" @onComplete="onComplete" @onNextStep="nextStep" @onPreviousStep="previousStep" @onReset="reset" @onCancel="cancel">
+
+        <tab-content title="Source Type" :selected="true">
+
+            <h3>
+                Select the type of data source.
+            </h3>
+
             <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <input type="text" class="form-control" :class="hasError('fullName') ? 'is-invalid' : ''" placeholder="Enter your name" v-model="formData.fullName">
@@ -17,7 +28,8 @@
                 </div>
             </div>
         </tab-content>
-        <tab-content title="About your Company">
+
+        <tab-content title="Connection Details">
             <div class="form-group">
                 <label for="companyName">Your Company Name</label>
                 <input type="text" class="form-control" :class="hasError('companyName') ? 'is-invalid' : ''" placeholder="Enter your Company / Organization name" v-model="formData.companyName">
@@ -34,7 +46,36 @@
                 </div>
             </div>
         </tab-content>
-        <tab-content title="Finishing Up">
+
+        <tab-content title="Select Data Sets">
+            <h2>
+
+            </h2>
+            <div class="form-group">
+                <label for="referral">From Where did you hear about us</label>
+                <select :class="hasError('referral') ? 'is-invalid' : ''" class="form-control" v-model="formData.referral">
+                    <option>Newspaper</option>
+                    <option>Online Ad</option>
+                    <option>Friend</option>
+                    <option>Other</option>
+                </select>
+                <div v-if="hasError('referral')" class="invalid-feedback">
+                    <div class="error" v-if="!$v.formData.referral.required">Please select on of the fields.</div>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" :class="hasError('terms') ? 'is-invalid' : ''" class="form-check-input" v-model="formData.terms">
+                <label class="form-check-label">I accpet terms & conditions</label>
+                <div v-if="hasError('terms')" class="invalid-feedback">
+                    <div class="error" v-if="!$v.formData.terms.required">Please select terms and conditions.</div>
+                </div>
+            </div>
+        </tab-content>
+
+        <tab-content title="Verify">
+            <h2>
+
+            </h2>
             <div class="form-group">
                 <label for="referral">From Where did you hear about us</label>
                 <select :class="hasError('referral') ? 'is-invalid' : ''" class="form-control" v-model="formData.referral">
@@ -56,6 +97,13 @@
             </div>
         </tab-content>
     </form-wizard>
+
+
+    </div>
+
+
+
+
 </template>
 
 <script>
@@ -64,8 +112,6 @@ import TabContent from '../components/TabContent.vue';
 import ValidationHelper from '../components/ValidationHelper.vue';
 
 import { required, email, numeric } from 'vuelidate/lib/validators';
-// import { email } from 'vuelidate/lib/validators';
-// import { numeric } from 'vuelidate/lib/validators';
 
 const checked = (value) => value === true;
 
@@ -102,26 +148,26 @@ export default {
         }
     },
     methods:{
-        onComplete(){
+        onComplete() {
             alert("[simplestepper] Submitting Form.");
             this.$refs.formwizard.changeStatus();
         },
 
-        reset(){
+        reset() {
             for(let field in this.formData){
                 this.formData[field] = null;
             }
         },
 
-        cancel(){
+        cancel() {
             console.log("[simplestepper] cancel the whole thing?");
         },
 
-        nextStep(){
+        nextStep() {
             console.log("[simplestepper] going to Next Step");
         },
 
-        previousStep(){
+        previousStep() {
             console.log("[simplestepper] going to Previous Step");
         }
     }
