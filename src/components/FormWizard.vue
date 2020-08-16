@@ -35,15 +35,15 @@
         <div class="wizard-footer">
             <div class="btn-group" role="group">
                 <template v-if="!submitSuccess">
-                  <button @click="previousTab" :disabled="currentTab === 0" class="step-button step-button-previous">Previous</button>
-                  <button @click="nextTab" v-if="currentTab < totalTabs - 1" class="step-button step-button-next">Next</button>
-                  <button @click="onSubmit" v-if="currentTab === totalTabs - 1" class="step-button step-button-submit">Submit</button>
-                  <button @click="onCancel" v-if="currentTab === totalTabs - 1" class="step-button step-button-cancel">Cancel</button>
+                  <button @click="previousTab" :disabled="isFirstStep" class="step-button step-button-previous">Previous</button>
+                  <button @click="nextTab" v-if="isMiddleStep" class="step-button step-button-next">Continue</button>
+                  <button @click="onSubmit" v-if="isLastStep" class="step-button step-button-submit">Submit</button>
+                  <button @click="onCancel" class="step-button step-button-cancel">Cancel</button>
                 </template>
 
-                <template v-else>
+                <!-- <template v-else>
                   <button @click="reset" class="step-button step-button-reset">Reset</button>
-                </template>
+                </template> -->
             </div>
         </div>
 
@@ -90,7 +90,7 @@ export default {
         // this.isValidationSupport = (Object.keys(this.store.validation).length !== 0 && this.store.validation.constructor === Object) ? true : false;
     },
 
-    methods:{
+    methods: {
         previousTab() {
           console.log ("[formwizard] previous tab");
             this._switchTab(this.currentTab - 1);
@@ -107,10 +107,7 @@ export default {
 
         },
 
-        cancel() {
-           console.log ("[formwizard] cancelling...");
-        },
-
+        // not using reset functionality
         reset() {
            this.tabs.forEach(tab => {
              tab.isActive = false;
@@ -152,6 +149,10 @@ export default {
             }
 
             this._switchTab(index);
+        },
+
+        onCancel() {
+           console.log ("[formwizard] cancelling...");
         },
 
 
@@ -209,7 +210,24 @@ export default {
         }
 
     },
-    watch:{
+    computed: {
+      isFirstStep() {
+        console.log ("[first?] first:", (this.currentTab === 0) ? true : false);
+        return (this.currentTab === 0) ? true : false;
+
+      },
+      isLastStep() {
+        console.log ("[last?] last:", this.currentTab, '/', this.totalTabs, ':', (this.currentTab === this.totalTabs) ? true : false);
+        return (this.currentTab === (this.totalTabs - 1)) ? true : false;
+      },
+      isMiddleStep() {
+        console.log ("[midle?] middle:", this.currentTab, '/', this.totalTabs, ':', (this.currentTab < this.totalTabs) ? true : false);
+        return (this.currentTab < (this.totalTabs - 1)) ? true : false;
+      },
+
+    },
+
+    watch: {
        currentTab() {
           this.$store.dispatch("wizard/changeTab", this.currentTab);
           // this.$store.setCurrentTab(this.currentTab);
