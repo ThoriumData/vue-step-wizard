@@ -2,10 +2,14 @@
   "name": "vue-step-wizard",
   "version": "0.2.0",
   "private": false,
-  "description": "A simple vuejs step/form wizard plugin",
+  "description": "A simple vuejs step/form wizard plugin. modified significantly from the original to work for th prototype.",
   "author": {
     "name": "Tushar Gugnani",
     "email": "tushar@5balloons.info"
+  },
+  "contributors": {
+    "name": "m. milano",
+    "email": "mmilano+git@gmail.com"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -14,9 +18,9 @@
     "build-library": "vue-cli-service build --target lib --name vue-step-wizard ./src/install.js"
   },
   "main": "./dist/vue-step-wizard.common.js",
-  "unpkg": "./dist/vue-step-wizard.common.min.js",
   "files": [
-    "dist"
+    "src/components/wizard/*",
+    "src/assets/scss/components/*"
   ],
   "dependencies": {
     "core-js": "^3.6.5",
@@ -65,8 +69,7 @@
     "vue form wizard",
     "vue stepper",
     "vue multi step form",
-    "step component vue",
-    "previous next tabs vue"
+    "step component vue"
   ],
   "license": "MIT",
   "repository": "https://github.com/thoriumdata/vue-step-wizard"
