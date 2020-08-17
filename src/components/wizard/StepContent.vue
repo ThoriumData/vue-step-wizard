@@ -6,7 +6,7 @@
 
 <script>
 	export default {
-		name: 'tab-content',
+		name: 'step-content',
 		props:{
 			selected: {
 				default: false,
@@ -19,7 +19,7 @@
 		data(){
 			return{
 				isActive: false,
-				isValidated : false,
+				isValidated: false,
 			}
 		},
 		created(){

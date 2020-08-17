@@ -6,7 +6,7 @@
 
    <form-wizard ref="formwizard" @onComplete="onComplete" @onNextStep="nextStep" @onPreviousStep="previousStep" @onReset="reset" @onCancel="cancel">
 
-        <tab-content title="Source Type" :selected="true">
+        <step-content title="Source Type" :selected="true">
 
             <h3>
                 Select the type of data source.
@@ -27,9 +27,9 @@
                     <div class="error" v-if="!$v.formData.email.email">Should be in email format</div>
                 </div>
             </div>
-        </tab-content>
+        </step-content>
 
-        <tab-content title="Connection Details">
+        <step-content title="Connection Details">
 
             <h3>
                 Select the type of data source.
@@ -51,9 +51,9 @@
                 </div>
             </div>
 
-        </tab-content>
+        </step-content>
 
-        <tab-content title="Select Data Sets">
+        <step-content title="Select Data Sets">
             <h3>
                 Select the individual data sets.
             </h3>
@@ -76,9 +76,9 @@
                     <div class="error" v-if="!$v.formData.terms.required">Please select terms and conditions.</div>
                 </div>
             </div>
-        </tab-content>
+        </step-content>
 
-        <tab-content title="Verify">
+        <step-content title="Verify">
             <h3>
                 Provide individual details for each selected asset.
             </h3>
@@ -101,7 +101,7 @@
                     <div class="error" v-if="!$v.formData.terms.required">Please select terms and conditions.</div>
                 </div>
             </div>
-        </tab-content>
+        </step-content>
     </form-wizard>
 
     <modal>
@@ -117,11 +117,11 @@
 </template>
 
 <script>
-import FormWizard from '../components/FormWizard.vue';
-import TabContent from '../components/TabContent.vue';
+import FormWizard from '../components/wizard/FormWizard.vue';
+import StepContent from '../components/wizard/StepContent.vue';
 import Modal from '../components/Modal.vue';
 
-import ValidationHelper from '../components/ValidationHelper.vue';
+import ValidationHelper from '../components/wizard/ValidationHelper.vue';
 
 import { required, email, numeric } from 'vuelidate/lib/validators';
 
@@ -131,7 +131,7 @@ export default {
     name: 'SimpleWizard',
     components: {
         FormWizard,
-        TabContent,
+        StepContent,
         Modal
     },
     mixins: [ValidationHelper],

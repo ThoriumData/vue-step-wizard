@@ -6,13 +6,13 @@ const wizard = {
 
     // initialize wizard states
     state: {
-        currentTab: 0,
+        currentStep: 0,
         validation: {},
     },
 
     mutations: {
-        setCurrentTab(state, tab) {
-            state.currentTab = tab;
+        setCurrentStep(state, step) {
+            state.currentStep = step;
         },
 
         setValidation(state, validation) {
@@ -21,32 +21,27 @@ const wizard = {
     },
 
     actions: {
-        nextTab({ commit }, tab) {
-            console.log("move to next tab");
-
-            commit("setCurrentTab", tab);
+        nextStep({ commit }, step) {
+            console.log("move to next step");
+            commit("setCurrentStep", step);
         },
-        previousTab({ commit }, tab) {
-            console.log("move to previous tab");
-
-            commit("setCurrentTab", tab);
+        previousStep({ commit }, step) {
+            console.log("move to previous step");
+            commit("setCurrentStep", step);
         },
 
-        changeTab({ commit }, tab) {
-            console.log("[store] change tab:", tab);
-
-            commit("setCurrentTab", tab);
+        changeStep({ commit }, step) {
+            console.log("[store] change tab:", step);
+            commit("setCurrentStep", step);
         },
-
         changeValidation({ commit }, validation) {
             console.log("[store] changeValidation: ", validation);
-
             commit("setValidation", validation);
         },
     },
 
     getters: {
-        currentTab: (state) => state.currentTab,
+        currentStep: (state) => state.currentStep,
     },
 };
 

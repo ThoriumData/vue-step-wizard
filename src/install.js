@@ -1,13 +1,13 @@
-import FormWizard from "./components/FormWizard.vue";
-import TabContent from "./components/TabContent.vue";
-import ValidationHelper from './components/ValidationHelper.vue';
+import FormWizard from "./components/wizard/FormWizard.vue";
+import StepContent from "./components/wizard/StepContent.vue";
+import ValidationHelper from "./components/wizard/ValidationHelper.vue";
 
 const VueStepWizard = {
  install(Vue) {
   // Let's register our component globally
   // https://vuejs.org/v2/guide/components-registration.html
     Vue.component("form-wizard", FormWizard);
-    Vue.component("tab-content", TabContent);
+    Vue.component("step-content", StepContent);
  }
 };
 
@@ -19,6 +19,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default VueStepWizard;
 export {
     FormWizard,
-    TabContent,
+    StepContent,
     ValidationHelper
   };

@@ -24,7 +24,7 @@ export default {
     computed: {
         rules() {
             // if(this.validationRules)
-                // return this.validationRules[this.store.currentTab] ? this.validationRules[this.store.currentTab] : {}
+                // return this.validationRules[this.store.currentStep] ? this.validationRules[this.store.currentStep] : {}
             // else
                 // return {};
             return true;
