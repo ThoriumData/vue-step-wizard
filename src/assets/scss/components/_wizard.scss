@@ -8,17 +8,17 @@
 @use "../common";
 
 
-$wizard-color-background: #F7F8FC;
+$wizard-color-background: #F7F8FC;  // todo: dev: temp for development
 
 $wizard-width: 100%;
 $wizard-padding: 40px;
 
-$wizard-body-color-background: #FFF;
+$wizard-body-color-background: $core-white;
 
 
-$wizard-step-color-background-default:    #AAA;
+$wizard-step-color-background-default:      $color-white-darker5;
 $wizard-step-color-background-active:       $thorium-blue;
-$wizard-step-color-background-completed:   color.adjust($alert-success, $lightness: -7%);
+$wizard-step-color-background-completed:    color.adjust($alert-success, $lightness: -7%);
 
 
 
@@ -203,15 +203,15 @@ $wizard-step-index-background-completed:   color.adjust($alert-success, $lightne
     margin: 0.5rem;
     padding: 0.5rem 1.25rem;
 
-    border: 1px solid;
-    //border-radius: 12px;
+    // border: 1px solid;
+    // border-radius: 12px;
 
-    font-weight: 700;
-    line-height: 1;
+    // font-weight: 700;
+    // line-height: 1;
     // text-transform: uppercase;
 
-    text-align: center;
-    color: #22292f;
+    // text-align: center;
+    // color: #22292f;
 
 
     // font-size: $font-size-sm;
@@ -230,9 +230,9 @@ $wizard-step-index-background-completed:   color.adjust($alert-success, $lightne
         background-color: #126fde;
     }
 
-    .step-button-previous {
-        background-color: #3deaba;
-    }
+    // .step-button-previous {
+    //     background-color: #3deaba;
+    // }
 
     .step-button-submit {
         background-color: #4fa203;
