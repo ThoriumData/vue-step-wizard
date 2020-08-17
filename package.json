@@ -20,6 +20,7 @@
   "main": "./dist/vue-step-wizard.common.js",
   "files": [
     "src/components/wizard/*",
+    "src/store/modules/wizard.js",
     "src/assets/scss/components/*"
   ],
   "dependencies": {
