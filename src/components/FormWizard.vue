@@ -33,18 +33,18 @@
         </div>
 
         <div class="wizard-footer">
-            <div class="btn-group" role="group">
+            <!-- <div class="btn-group" role="group"> -->
                 <template v-if="!submitSuccess">
-                  <button @click="previousTab" :disabled="isFirstStep" class="step-button step-button-previous">Previous</button>
-                  <button @click="nextTab" v-if="isMiddleStep" class="step-button step-button-next">Continue</button>
-                  <button @click="onSubmit" v-if="isLastStep" class="step-button step-button-submit">Submit</button>
-                  <button @click="onCancel" class="step-button step-button-cancel">Cancel</button>
+                  <button type="button" @click="previousTab" :disabled="isFirstStep" class="btn btn-secondary step-button">Previous</button>
+                  <button type="button" @click="nextTab" v-if="isMiddleStep" class="btn btn-primary step-button">Continue</button>
+                  <button type="button" @click="onSubmit" v-if="isLastStep" class="btn btn-primary step-button step-button-submit">Submit</button>
+                  <button type="button" @click="onCancel" class="btn btn-outline-secondary step-button step-button-cancel">Cancel</button>
                 </template>
 
                 <!-- <template v-else>
                   <button @click="reset" class="step-button step-button-reset">Reset</button>
                 </template> -->
-            </div>
+            <!-- </div> -->
         </div>
 
     </div>
@@ -53,14 +53,14 @@
 <script>
 
 export default {
-    name: 'form-wizard',
+    name: "form-wizard",
     data() {
         return{
             tabs: [],
-            currentTab : 0,
-            totalTabs : 0,
+            currentTab: 0,
+            totalTabs: 0,
             // storeState: store.state,
-            submitSuccess : false,
+            submitSuccess: false,
             progress: 0,
             isValidationSupport: false
         }
@@ -92,13 +92,13 @@ export default {
 
     methods: {
         previousTab() {
-          console.log ("[formwizard] previous tab");
+          console.log ("[formwizard] previous step");
             this._switchTab(this.currentTab - 1);
             this.$emit('onPreviousStep');
         },
 
         nextTab() {
-          console.log ("[formwizard] next tab");
+          console.log ("[formwizard] next step");
             if(this._validateCurrentTab() === false) {
                 return;
             }
@@ -210,6 +210,7 @@ export default {
         }
 
     },
+
     computed: {
       isFirstStep() {
         console.log ("[first?] first:", (this.currentTab === 0) ? true : false);
