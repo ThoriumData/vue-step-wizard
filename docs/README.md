@@ -23,15 +23,15 @@ import 'vue-step-wizard/dist/vue-step-wizard.css'
 Vue.use(VueStepWizard);
 ```
 
-### Local 
+### Local
 ```javascript
 //local registration
-import {FormWizard, TabContent} from 'vue-step-wizard'
+import {FormWizard, StepContent} from 'vue-step-wizard'
 import 'vue-step-wizard/dist/vue-step-wizard.css'
 //component code
 components: {
   FormWizard,
-  TabContent
+  StepContent
 }
 ```
 
@@ -42,17 +42,17 @@ components: {
 
 ```
     <form-wizard>
-        <tab-content title="About You" :selected="true">
+        <step-content title="About You" :selected="true">
             This is content of Tab 1
-        </tab-content>
-        <tab-content title="About your Company"> 
+        </step-content>
+        <step-content title="About your Company">
             <p>Can contains</p>
             <p>Multiple Elements</p>
-        </tab-content>
-        <tab-content title="Finishing Up">
+        </step-content>
+        <step-content title="Finishing Up">
             <p>Or an image .. or any thing</p>
             <img src="../assets/dog.png" alt="Simple" />
-        </tab-content>  
+        </step-content>
     </form-wizard>
 ```
 
@@ -66,6 +66,7 @@ components: {
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
 ></iframe>
 
+
 ### Form Stepper
 
 It's same as building a stepper, you just need to decide which form fields goes into which tab-content component and bind it with you vue model attribute.
@@ -73,19 +74,19 @@ It's same as building a stepper, you just need to decide which form fields goes 
 ```javascript
 <template>
     <form-wizard>
-        <tab-content title="About You" :selected="true">
+        <step-content title="About You" :selected="true">
             <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <input type="text" class="form-control" placeholder="Enter your name" v-model="fullName">
             </div>
-        </tab-content>
-        <tab-content title="About your Company"> 
+        </step-content>
+        <step-content title="About your Company">
             <div class="form-group">
                 <label for="companyName">Your Company Name</label>
                 <input type="text" class="form-control" placeholder="Enter your Company / Organization name" v-model="companyName">
             </div>
-        </tab-content>
-        <tab-content title="Finishing Up">
+        </tstepab-content>
+        <step-content title="Finishing Up">
             <div class="form-group">
                 <label for="referral">From Where did you hear about us</label>
                 <select class="form-control" v-model="referral">
@@ -95,19 +96,18 @@ It's same as building a stepper, you just need to decide which form fields goes 
                     <option>Other</option>
                 </select>
             </div>
-        </tab-content>
+        </step-content>
     </form-wizard>
 </template>
 
 <script>
-import {FormWizard, TabContent} from 'vue-step-wizard'
+import {FormWizard, StepContent} from 'vue-step-wizard'
 import "vue-step-wizard/dist/vue-step-wizard.css";
-
 
 export default {
     name: 'BasicStepperForm',
     components: {
-        FormWizard, TabContent
+        FormWizard, StepContent
     },
     data(){
         return {
@@ -133,26 +133,27 @@ export default {
 
 ### Multi Step Form with Validation
 
-Vue Step Wizard uses [Vuelidate](https://vuelidate.js.org/) plugin under the hood to perform form validations. 
+Vue Step Wizard uses [Vuelidate](https://vuelidate.js.org/) plugin under the hood to perform form validations.
 Building a multistep form with validation is a breeze you just need to make sure the data propety matches a couple of syntax and along with that you need to include a mixin named ValidationHelper.
 
 Here is what needs to be done.
 
 #### Include Mixin
 
-To get the validation support, you should include the mixin name ValidationHelper in your component. (If you are doing local component registration this File needs to be imported seperately along with FormWizard and TabContent)
+To get the validation support, you should include the mixin name ValidationHelper in your component.
+(If you are doing local component registration this File needs to be imported seperately along with FormWizard and TabContent)
 
 ```javascript
     mixins: [ValidationHelper],
 
     //Local Registration
-    import ValidationHelper from '../components/ValidationHelper.vue';
+    import ValidationHelper from '../components/wizard/ValidationHelper.vue';
     ....
     mixins: [ValidationHelper]
 ```
 
-#### Form Data 
-* All the form fields (from all the steps), needs to be defined inside a dedicated object named formData
+#### Form Data
+* All the form fields (from all the steps), needs to be defined inside a dedicated object named formData.
 
 ```javascript
     formData:{
@@ -191,9 +192,9 @@ For the available built in validators , refer [Vuelidate Builtin Validators](htt
 #### Check and Display Error
 
 
-You can utilize a special method named hasError('fieldName') to check if the field has an error associated with it. 
+You can utilize a special method named hasError('fieldName') to check if the field has an error associated with it.
 
-You can use this to apply error classes on the input field, and also to display the error message. 
+You can use this to apply error classes on the input field, and also to display the error message.
 
 ```HTML
     <!--Single Error Message-->
