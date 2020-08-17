@@ -10,7 +10,7 @@ import { validationMixin } from "vuelidate";
 // import { store } from "../store/store";
 
 export default {
-    name: 'ValidationHelper',
+    name: 'WizardValidationHelper',
     mixins: [validationMixin],
     data() {
         return{

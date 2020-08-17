@@ -121,7 +121,7 @@ import FormWizard from '../components/wizard/FormWizard.vue';
 import StepContent from '../components/wizard/StepContent.vue';
 import Modal from '../components/Modal.vue';
 
-import ValidationHelper from '../components/wizard/ValidationHelper.vue';
+import WizardValidationHelper from '../components/wizard/WizardValidationHelper.vue';
 
 import { required, email, numeric } from 'vuelidate/lib/validators';
 
@@ -134,7 +134,7 @@ export default {
         StepContent,
         Modal
     },
-    mixins: [ValidationHelper],
+    mixins: [WizardValidationHelper],
     data(){
         return {
             formData:{

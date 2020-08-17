@@ -1,6 +1,6 @@
 import FormWizard from "./components/wizard/FormWizard.vue";
 import StepContent from "./components/wizard/StepContent.vue";
-import ValidationHelper from "./components/wizard/ValidationHelper.vue";
+import WizardValidationHelper from "./components/wizard/Wizard/ValidationHelper.vue";
 
 const VueStepWizard = {
  install(Vue) {
@@ -20,5 +20,5 @@ export default VueStepWizard;
 export {
     FormWizard,
     StepContent,
-    ValidationHelper
+    WizardValidationHelper
   };

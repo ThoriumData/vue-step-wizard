@@ -140,16 +140,16 @@ Here is what needs to be done.
 
 #### Include Mixin
 
-To get the validation support, you should include the mixin name ValidationHelper in your component.
+To get the validation support, you should include the mixin name WizardValidationHelper in your component.
 (If you are doing local component registration this File needs to be imported seperately along with FormWizard and TabContent)
 
 ```javascript
-    mixins: [ValidationHelper],
+    mixins: [WizardValidationHelper],
 
     //Local Registration
-    import ValidationHelper from '../components/wizard/ValidationHelper.vue';
+    import WizardValidationHelper from '../components/wizard/WizardValidationHelper.vue';
     ....
-    mixins: [ValidationHelper]
+    mixins: [WizardValidationHelper]
 ```
 
 #### Form Data
