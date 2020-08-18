@@ -11,6 +11,7 @@
         </div>
   -->
 
+        <!-- build the list of steps as 'tabs' -->
         <ul class="wizard-steps">
           <li @click.prevent.stop="selectStep(index)"
             class="step-item"
@@ -35,7 +36,7 @@
         <div class="wizard-footer">
             <!-- <div class="btn-group" role="group"> -->
                 <template v-if="!submitSuccess">
-                  <button type="button" @click="previousStep" :disabled="isFirstStep" class="btn btn-secondary step-button">Previous</button>
+                  <button type="button" @click="previousStep" :disabled="isFirstStep" v-show="!isFirstStep" class="btn btn-secondary step-button">Previous</button>
                   <button type="button" @click="nextStep" v-if="isMiddleStep" class="btn btn-primary step-button">Continue</button>
                   <button type="button" @click="onSubmit" v-if="isLastStep" class="btn btn-primary step-button step-button-submit">Submit</button>
                   <button type="button" @click="onCancel" class="btn btn-outline-secondary step-button step-button-cancel">Cancel</button>
@@ -52,8 +53,16 @@
 
 <script>
 
+import { RegisterStoreModule } from "@/mixins/mixins";
+
+// have component import its own store, which is registered on created()
+import wizardModule from "@/store/modules/wizard";
+
 export default {
     name: "form-wizard",
+
+    mixins: [RegisterStoreModule],
+
     data() {
         return{
             steps: [],
@@ -64,6 +73,10 @@ export default {
             progress: 0,
             isValidationSupport: false
         }
+    },
+
+    created() {
+      this.registerStoreModule('wizard', wizardModule);
     },
     mounted() {
             this.steps = this.$children;

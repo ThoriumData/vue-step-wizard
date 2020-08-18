@@ -2,10 +2,9 @@
 // scss file
 // for wizard component
 
-@use "sass:map";
 @use "sass:color";
 
-@use "../common";
+@use "../common" as *;
 
 
 $wizard-color-background: #F7F8FC;  // todo: dev: temp for development
@@ -15,16 +14,13 @@ $wizard-padding: 40px;
 
 $wizard-body-color-background: $core-white;
 
-
 $wizard-step-color-background-default:      $color-white-darker5;
 $wizard-step-color-background-active:       $thorium-blue;
 $wizard-step-color-background-completed:    color.adjust($alert-success, $lightness: -7%);
 
 
-
 $wizard-step-text-color:                $core-black;
 $wizard-step-index-background-color:    #888;
-
 $wizard-step-index-background-completed:   color.adjust($alert-success, $lightness: -37%);
 
 

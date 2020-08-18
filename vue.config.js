@@ -9,13 +9,9 @@ module.exports = {
     // modify the index.html's <title>
     chainWebpack: (config) => {
         config.plugin("html").tap((args) => {
-            args[0].title = "ThoriumData";
+            args[0].title = "Wizard";
             return args;
         });
-//         config.plugin("fork-ts-checker").tap((args) => {
-//             args[0].memoryLimit = 2096;
-//             return args;
-//         });
 
         // clear out the less rules in the hope that this will speed things up a tiny tiny bit
         const lessRules = config.module.rule("less");

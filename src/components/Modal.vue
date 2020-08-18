@@ -42,13 +42,12 @@
 			},
 			title: {
 				type: String,
-				required: true
 			}
 		},
 		data(){
 			return{
 				isActive: false,
-				isValidated : false,
+				isValidated: false,
 			}
 		},
 		created(){

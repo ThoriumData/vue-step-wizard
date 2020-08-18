@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>
-            Wizard Heading
+            Page Heading
         </h1>
 
    <form-wizard ref="formwizard" @onComplete="onComplete" @onNextStep="nextStep" @onPreviousStep="previousStep" @onReset="reset" @onCancel="cancel">
@@ -119,7 +119,7 @@
 <script>
 import FormWizard from '../components/wizard/FormWizard.vue';
 import StepContent from '../components/wizard/StepContent.vue';
-import Modal from '../components/Modal.vue';
+// import Modal from '../components/Modal.vue';
 
 import WizardValidationHelper from '../components/wizard/WizardValidationHelper.vue';
 
@@ -132,7 +132,7 @@ export default {
     components: {
         FormWizard,
         StepContent,
-        Modal
+        // Modal
     },
     mixins: [WizardValidationHelper],
     data(){

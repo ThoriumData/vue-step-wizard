@@ -31,7 +31,7 @@ const wizard = {
         },
 
         changeStep({ commit }, step) {
-            console.log("[store] change tab:", step);
+            console.log("[store] change step:", step);
             commit("setCurrentStep", step);
         },
         changeValidation({ commit }, validation) {

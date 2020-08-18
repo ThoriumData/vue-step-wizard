@@ -7,7 +7,7 @@
 <script>
 	export default {
 		name: 'step-content',
-		props:{
+		props: {
 			selected: {
 				default: false,
 			},
@@ -16,13 +16,13 @@
 				required: true
 			}
 		},
-		data(){
+		data() {
 			return{
 				isActive: false,
 				isValidated: false,
 			}
 		},
-		created(){
+		created() {
 			this.isActive = this.selected;
 		}
 	}
