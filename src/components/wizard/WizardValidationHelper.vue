@@ -12,22 +12,28 @@ import { validationMixin } from "vuelidate";
 export default {
     name: 'WizardValidationHelper',
     mixins: [validationMixin],
+
     data() {
-        return{
+        return {
             // storeState: store.state,
+            storeState: this.$store.state.wizard,
         }
     },
+
     mounted() {
         // store.setValidation(this.$v);
         this.$store.dispatch("wizard/changeValidation", this.$v);
     },
     computed: {
         rules() {
-            // if(this.validationRules)
+            console.log ("** WVH: ", this.validationRules)
+            if(this.validationRules)
                 // return this.validationRules[this.store.currentStep] ? this.validationRules[this.store.currentStep] : {}
-            // else
+                return this.validationRules[this.$store.state.wizard.currentStep] ? this.validationRules[this.$store.state.wizard.currentStep] : {}
+            else {
                 // return {};
             return true;
+            }
         },
     },
     methods: {
