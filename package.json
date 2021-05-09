@@ -24,21 +24,21 @@
     "src/assets/scss/components/*"
   ],
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.10",
-    "vuelidate": "^0.7.5",
-    "vuex": "^3.4.0"
+    "core-js": "^3.12.1",
+    "vue": "^2.6.12",
+    "vuelidate": "^0.7.6",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.4",
     "@vue/cli-plugin-eslint": "^4.5.4",
-    "@vue/cli-plugin-vuex": "^4.5.4",
+    "@vue/cli-plugin-vuex": "^4.5.13",
     "@vue/cli-service": "^4.5.4",
     "babel-eslint": "^10.0.1",
     "bootstrap": "^4.5.2",
     "eslint": "^7.7.0",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.26.10",
+    "sass": "^1.32.12",
     "sass-loader": "^9.0.3",
     "vue-template-compiler": "^2.6.10"
   },
