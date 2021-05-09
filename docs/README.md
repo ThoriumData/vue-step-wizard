@@ -62,8 +62,8 @@ components: {
      src="https://codesandbox.io/embed/vue-step-wizard-basic-stepper-zc3mq?fontsize=14&hidenavigation=1&theme=dark&view=preview"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="vue step wizard (Basic Stepper)"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
+     allow="accelerometer"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
 
@@ -126,22 +126,22 @@ export default {
      src="https://codesandbox.io/embed/interesting-elion-ohnet?fontsize=14&hidenavigation=1&theme=dark&view=preview"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="interesting-elion-ohnet"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"></iframe>
+     allow="accelerometer"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>
 
 ## Validation Support
 
 ### Multi Step Form with Validation
 
 Vue Step Wizard uses [Vuelidate](https://vuelidate.js.org/) plugin under the hood to perform form validations.
-Building a multistep form with validation is a breeze you just need to make sure the data propety matches a couple of syntax and along with that you need to include a mixin named ValidationHelper.
+Building a multistep form with validation is a breeze – you just need to make sure the data property matches a couple of syntax details, and you need to include a mixin named WizardValidationHelper.
 
 Here is what needs to be done.
 
 #### Include Mixin
 
 To get the validation support, you should include the mixin name WizardValidationHelper in your component.
-(If you are doing local component registration this File needs to be imported seperately along with FormWizard and TabContent)
+If you are doing local component registration this file needs to be imported separately, with FormWizard and TabContent.
 
 ```javascript
     mixins: [WizardValidationHelper],
@@ -153,10 +153,10 @@ To get the validation support, you should include the mixin name WizardValidatio
 ```
 
 #### Form Data
-* All the form fields (from all the steps), needs to be defined inside a dedicated object named formData.
+* All the form fields (from all the steps), need to be defined inside a dedicated object named `formData`.
 
 ```javascript
-    formData:{
+    formData: {
         fullName: '',
         email: null,
         companyName: null,
@@ -171,7 +171,7 @@ To get the validation support, you should include the mixin name WizardValidatio
 
 For defining the validation rules, you should import the vuelidate validation rule which you are looking to use.
 
-All the validation rules must go under a array named validationRules. Validation of each step must go inside it's own object.
+All the validation rules must be in an array named `validationRules`. Validation for each step must go inside an object for each step.
 
 ```javascript
     import { required } from 'vuelidate/lib/validators';
@@ -180,19 +180,20 @@ All the validation rules must go under a array named validationRules. Validation
     ...
     ...
     ...
-    validationRules:[
+    validationRules: [
         {fullName: {required}, email: {required, email} },  //Validation Rules for step 1
+
         {companyName: {required}, numberOfEmployees: {required, numeric} },   //Validation for step 2
+
         {referral: {required}, terms: {required, numeric} }   //Validation for step 3
     ]
 ```
 
-For the available built in validators , refer [Vuelidate Builtin Validators](https://vuelidate.js.org/#sub-builtin-validators)
+For the built-in validators , refer to [Vuelidate Builtin Validators](https://vuelidate.js.org/#sub-builtin-validators)
 
 #### Check and Display Error
 
-
-You can utilize a special method named hasError('fieldName') to check if the field has an error associated with it.
+You can utilize a special method named `hasError('fieldName')` to check if the field has an error associated with it.
 
 You can use this to apply error classes on the input field, and also to display the error message.
 
@@ -223,16 +224,17 @@ You can use this to apply error classes on the input field, and also to display 
      src="https://codesandbox.io/embed/vue-step-wizard-form-with-validation-ghz85?fontsize=14&hidenavigation=1&theme=dark&view=preview"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="vue-step-wizard (Form with Validation)"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-autoplay"
+     allow="accelerometer"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
+
 
 
 ## Events
 
-### Form Submit
+### Overall Form Submit
 
-You can utilize the `onComplete` event on form-wizard component to execute the custom code on form submission.
+The `onComplete` event in `form-wizard` component executes on form submission.
 
 
 ```HTML
